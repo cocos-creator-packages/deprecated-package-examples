@@ -1,0 +1,23 @@
+{
+  "name": "demo-simple",
+  "version": "0.0.1",
+  "description": "Simple Demo",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "menus": {
+    "Examples/Simple": {
+      "message": "demo-simple:open"
+    }
+  },
+  "panels": {
+    "panel": {
+      "frame": "panel/panel.html",
+      "type": "dockable",
+      "title": "Simple",
+      "width": 800,
+      "height": 600,
+      "messages": [
+      ]
+    }
+  }
+}

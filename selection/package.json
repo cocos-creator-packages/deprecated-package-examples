@@ -1,0 +1,38 @@
+{
+  "name": "demo-selection",
+  "version": "0.0.1",
+  "description": "Selection Demo",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "menus": {
+    "Demos/Selection": {
+      "message": "demo-selection:open"
+    }
+  },
+  "panels": {
+    "panel1": {
+      "frame": "panel/panel1.html",
+      "type": "dockable",
+      "title": "Selection 1",
+      "width": 800,
+      "height": 600,
+      "messages": [
+          "selection:changed",
+          "selection:hoverin",
+          "selection:hoverout"
+      ]
+    },
+    "panel2": {
+      "frame": "panel/panel2.html",
+      "type": "dockable",
+      "title": "Selection 2",
+      "width": 800,
+      "height": 600,
+      "messages": [
+          "selection:changed",
+          "selection:hoverin",
+          "selection:hoverout"
+      ]
+    }
+  }
+}

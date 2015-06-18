@@ -1,0 +1,110 @@
+<dom-module id="demo-selection-panel2">
+    <style>
+        :host {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: stretch;
+            flex-direction: column;
+        }
+        li {
+            cursor: pointer;
+            padding: 5px;
+            margin: 1px;
+            list-style-type: none;
+        }
+        ul li:hover {
+            background: #555;
+        }
+        ul li[selected] {
+            background: #09f;
+        }
+        ul li[hover] {
+            background: #f90;
+        }
+    </style>
+
+    <template>
+        <ul>
+            <template is="dom-repeat" items="{{list}}" id="list">
+                <li on-click="_onSelect"
+                    hover$="{{item.hover}}"
+                    selected$="{{item.selected}}"><span>{{item.name}}</span>
+                </li>
+            </template>
+        </ul>
+    </template>
+</dom-module>
+
+<script>
+Editor.registerPanel( 'demo-selection.panel2', {
+    is: 'demo-selection-panel2',
+
+    ready: function () {
+        this.list = [
+            'extrajudicially',
+            'duse',
+            'appleton',
+            'aborning',
+            'evacuee',
+            'impecunious',
+            'overrude',
+            'subrange',
+            'hamlet',
+            'subtranslucency',
+        ].map( function ( item ) {
+            return { name: item, hover: false, selected: false };
+        });
+    },
+
+    attached: function () {
+        this.syncSelection('normal');
+    },
+
+    _onSelect: function ( event ) {
+        var model = event.model;
+        // model.set( 'item.selected', !model.item.selected );
+        Editor.Selection.select( 'normal', model.item.name, true, true );
+    },
+
+    'selection:changed': function ( type ) {
+        this.syncSelection(type);
+    },
+
+    'selection:hoverin': function ( type, name ) {
+        var idx = -1;
+        for ( var i = 0; i < this.list.length; ++i ) {
+            if ( this.list[i].name === name ) {
+                idx = i;
+                break;
+            }
+        }
+        if ( idx !== -1 ) {
+            var item = this.$.list.indexForElement(idx);
+            this.set('list.' + i + '.hover', true );
+        }
+    },
+
+    'selection:hoverout': function ( type, name ) {
+        var idx = -1;
+        for ( var i = 0; i < this.list.length; ++i ) {
+            if ( this.list[i].name === name ) {
+                idx = i;
+                break;
+            }
+        }
+        if ( idx !== -1 ) {
+            var item = this.$.list.indexForElement(idx);
+            this.set('list.' + i + '.hover', false );
+        }
+    },
+
+    syncSelection: function ( type ) {
+        var selection = Editor.Selection.curSelection(type);
+
+        for ( var i = 0; i < this.list.length; ++i ) {
+            var item = this.list[i];
+            this.set('list.' + i + '.selected', selection.indexOf(item.name) !== -1 );
+        }
+    },
+});
+</script>

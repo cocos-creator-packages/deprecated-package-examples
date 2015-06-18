@@ -1,0 +1,37 @@
+<dom-module id="list-view-item">
+    <style>
+        :host {
+            display: block;
+        }
+        .wrapper {
+            border: 1px solid white;
+            background-color: #333;
+            margin: 1rem;
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            overflow: visible;
+            height: 100px;
+        }
+
+    </style>
+
+    <template>
+        <div class="wrapper">
+            <h2>{{title}}</h2>
+            <p>{{desc}}</p>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: "list-view-item",
+            properties: {
+                title: String,
+                desc: String
+            }
+        });
+    </script>
+
+</dom-module>

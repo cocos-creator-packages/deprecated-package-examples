@@ -1,0 +1,27 @@
+<link rel="import" href="item.html">
+
+<dom-module id="demo-list-view">
+    <style>
+        :host {
+            overflow-y: scroll;
+        }
+    </style>
+
+    <template>
+        <template is="dom-repeat" id="list" items="{{list}}">
+            <list-view-item title={{item.title}} desc={{item.desc}}></list-view-item>
+        </template>
+    </template>
+</dom-module>
+
+<script>
+Editor.registerPanel( 'demo-list-view.panel', {
+    is: 'demo-list-view',
+
+    ready: function () {
+        Editor.sendRequestToCore('demo-list-view:query-list', function ( results ) {
+            this.list = results;
+        }.bind(this));
+    }
+});
+</script>
