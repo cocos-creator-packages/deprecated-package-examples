@@ -19,10 +19,18 @@
     #curveEditor {
         cursor: -webkit-grab;
     }
+    #instruction {
+        margin-top: 10px;
+        margin-left: 30px;
+        color: white;
+    }
   </style>
 
   <template>
     <div class="border fit">
+        <div id='instruction'>
+            <p>Use mouse scroll to zoom in/out, hold shift key to pan around.</p>
+        </div>
         <pixi-grid id="grid" class="fit"
             show-label-h
             show-label-v

@@ -3,14 +3,16 @@
 <dom-module id="demo-lifecycle">
     <style>
         :host {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: stretch;
-            flex-direction: column;
+            padding: 10px;
         }
     </style>
 
     <template>
+        <div>
+            <p id='instruction'>This panel demonstrate custom element life cycle by log event at key life cycle callback function.</p>
+            <p>Open 'simple-life.html' to see those events, and open console panel to see event fire order.</p>
+        </div>
+
         <simple-life name="a" class="flex-1">
             <simple-life name="a.b" class="fit">
                 <simple-life name="a.b.c-01" class="flex-1">
