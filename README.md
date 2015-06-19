@@ -28,8 +28,11 @@ Then click `Examples` in main menu, you'll see a list of examples. Click each on
 
 ## Example List
 
+- [Simple](/simple) The bare bone package without any functionality. Can be used as a template to create new packages.
 - [List View](/list-view) A list view that loads data from local file and populate the list with item template.
 - [Run Command](/run-command) A command runner receive command input from panel and run command on core-level, then send the stdout data back to panel for logging.
 - [Confirm Close](/confirm-close) When close a package panel, opens a native dialog and respond to user action. See [Electron's dialog docs](https://github.com/atom/electron/blob/master/docs/api/dialog.md) for details.
 - [Grid](/grid) A scalable/pan-able grid system, using [pixi-grid widget from builtin packages](https://github.com/fireball-packages/pixi-grid).
-- [Life Cycle](/lifecycle)
+- [Life Cycle](/lifecycle) Demonstrate how custom element life cycle works by logging at key life cycle callback functions.
+- [Selection](/selection) Demonstrate mouse drag selection and multi selection in a list.
+- [Shortcuts](/shortcuts) Demonstrate keyboard shortcuts event trigger and bubbling.

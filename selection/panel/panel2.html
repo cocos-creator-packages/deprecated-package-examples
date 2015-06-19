@@ -21,9 +21,15 @@
         ul li[hover] {
             background: #f90;
         }
+
+        p#instruction {
+            display: block;
+            padding: 15px;
+        }
     </style>
 
     <template>
+        <p id='instruction'>This package opens two panels, you can multi-select items in list, and your selection will be reflected in the other panel.</p>
         <ul>
             <template is="dom-repeat" items="{{list}}" id="list">
                 <li on-click="_onSelect"

@@ -15,7 +15,7 @@
       "type": "dockable",
       "title": "Selection 1",
       "width": 800,
-      "height": 600,
+      "height": 800,
       "messages": [
           "selection:changed",
           "selection:hoverin",
