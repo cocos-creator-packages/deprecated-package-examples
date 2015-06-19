@@ -35,4 +35,4 @@ Then click `Examples` in main menu, you'll see a list of examples. Click each on
 - [Grid](/grid) A scalable/pan-able grid system, using [pixi-grid widget from builtin packages](https://github.com/fireball-packages/pixi-grid).
 - [Life Cycle](/lifecycle) Demonstrate how custom element life cycle works by logging at key life cycle callback functions.
 - [Selection](/selection) Demonstrate mouse drag selection and multi selection in a list.
-- [Shortcuts](/shortcuts) Demonstrate keyboard shortcuts event trigger and bubbling.
+- [Shortcuts](/shortcuts) Demonstrate keyboard shortcuts event trigger and bubbling. Shortcuts are defined in `package.json`.
