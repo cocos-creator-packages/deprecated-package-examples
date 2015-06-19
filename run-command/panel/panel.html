@@ -1,0 +1,53 @@
+<link rel="import" href="packages://ui-kit/widget/input/input.html">
+<link rel="import" href="packages://ui-kit/widget/button/button.html">
+
+
+<dom-module id="demo-run-command">
+    <style>
+        :host {
+            padding: 15px;
+        }
+
+        .btn-run {
+            width: 80px;
+            margin-top: 10px;
+            float: right;
+        }
+    </style>
+
+    <template>
+        <p>Run this command: </p>
+        <editor-input value="{{cmdStr}}"></editor-input>
+        <p>In this path: </p>
+        <editor-input value="{{cwdStr}}"></editor-input>
+        <editor-button class="green btn-run" on-click="btnPressed">Run</editor-button>
+    </template>
+</dom-module>
+
+<script>
+Editor.registerPanel( 'demo-run-command.panel', {
+    is: 'demo-run-command',
+
+    ready: function () {
+        // placeholder command line and current working directory
+        // in Fireball we have npm test command to run unit test
+        // you can input new command and working directory in panel input field
+        this.cmdStr = 'npm test';
+        this.cwdStr = Editor.cwd;
+    },
+
+    btnPressed: function() {
+        // send command line and cwd to core-level
+        Editor.sendToCore('demo-run-command:run', {
+            cmd: this.cmdStr,
+            cwd: this.cwdStr
+        });
+    },
+
+    // to receive IPC message on page-level, you need to register message in package.json
+    "demo-run-command:log" : function (message) {
+        // log command process stdout from core-level
+        Editor.log(message);
+    }
+});
+</script>
