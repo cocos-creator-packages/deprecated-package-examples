@@ -22,32 +22,31 @@
         <editor-input value="{{cwdStr}}"></editor-input>
         <editor-button class="green btn-run" on-click="btnPressed">Run</editor-button>
     </template>
-</dom-module>
 
-<script>
-Editor.registerPanel( 'demo-run-command.panel', {
-    is: 'demo-run-command',
+    <script>
+        Editor.registerPanel( 'demo-run-command.panel', {
 
-    ready: function () {
-        // placeholder command line and current working directory
-        // in Fireball we have npm test command to run unit test
-        // you can input new command and working directory in panel input field
-        this.cmdStr = 'npm test';
-        this.cwdStr = Editor.cwd;
-    },
+            ready: function () {
+                // placeholder command line and current working directory
+                // in Fireball we have npm test command to run unit test
+                // you can input new command and working directory in panel input field
+                this.cmdStr = 'npm test';
+                this.cwdStr = Editor.cwd;
+            },
 
-    btnPressed: function() {
-        // send command line and cwd to core-level
-        Editor.sendToCore('demo-run-command:run', {
-            cmd: this.cmdStr,
-            cwd: this.cwdStr
+            btnPressed: function() {
+                // send command line and cwd to core-level
+                Editor.sendToCore('demo-run-command:run', {
+                    cmd: this.cmdStr,
+                    cwd: this.cwdStr
+                });
+            },
+
+            // to receive IPC message on page-level, you need to register message in package.json
+            "demo-run-command:log" : function (message) {
+                // log command process stdout from core-level
+                Editor.log(message);
+            }
         });
-    },
-
-    // to receive IPC message on page-level, you need to register message in package.json
-    "demo-run-command:log" : function (message) {
-        // log command process stdout from core-level
-        Editor.log(message);
-    }
-});
-</script>
+    </script>
+</dom-module>

@@ -50,34 +50,32 @@
             </div>
         </div>
     </template>
-</dom-module>
 
-<script>
-    Polymer({
-        is: 'simple-life',
-
-        properties: {
-            name: {
-                type: String,
-                value: 'Unknown',
+    <script>
+        Editor.registerElement({
+            properties: {
+                name: {
+                    type: String,
+                    value: 'Unknown',
+                },
             },
-        },
 
-        created: function () {
-            Editor.log( '%s created', this.getAttribute('name') );
-        },
+            created: function () {
+                Editor.log( '%s created', this.getAttribute('name') );
+            },
 
-        ready: function () {
-            Editor.log( '%s ready', this.name );
-        },
+            ready: function () {
+                Editor.log( '%s ready', this.name );
+            },
 
-        factoryImpl: function ( name ) {
-            this.name = name;
-            Editor.log( '%s factoryImpl', this.name );
-        },
+            factoryImpl: function ( name ) {
+                this.name = name;
+                Editor.log( '%s factoryImpl', this.name );
+            },
 
-        attached: function () {
-            Editor.log( '%s attached', this.name );
-        },
-    });
-</script>
+            attached: function () {
+                Editor.log( '%s attached', this.name );
+            },
+        });
+    </script>
+</dom-module>

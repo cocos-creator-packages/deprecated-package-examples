@@ -12,16 +12,15 @@
             <list-view-item title={{item.title}} desc={{item.desc}}></list-view-item>
         </template>
     </template>
+
+    <script>
+        Editor.registerPanel( 'demo-list-view.panel', {
+
+            ready: function () {
+                Editor.sendRequestToCore('demo-list-view:query-list', function ( results ) {
+                    this.list = results;
+                }.bind(this));
+            }
+        });
+    </script>
 </dom-module>
-
-<script>
-Editor.registerPanel( 'demo-list-view.panel', {
-    is: 'demo-list-view',
-
-    ready: function () {
-        Editor.sendRequestToCore('demo-list-view:query-list', function ( results ) {
-            this.list = results;
-        }.bind(this));
-    }
-});
-</script>
