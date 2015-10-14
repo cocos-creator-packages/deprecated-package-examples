@@ -1,11 +1,9 @@
+'use strict';
+
 var Fs = require('fire-fs');
 var Path = require('fire-path');
 
 global.__app = {
-    initCommander: function ( commander ) {
-        // TODO:
-    },
-
     init: function ( options, cb ) {
         // initialize ./.settings
         var settingsPath = Path.join(Editor.appPath, '.settings');
@@ -80,4 +78,4 @@ global.__app = {
     // },
 };
 
-require('../init');
+require('../index');
