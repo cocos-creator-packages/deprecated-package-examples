@@ -14,9 +14,11 @@ Editor.App.extend({
 
     // TODO: load your profile, and disable packages here
 
-    Editor.registerPackagePath( Editor.url('app://package-examples/') );
-    Editor.registerPackagePath( Editor.url('app://benchmark/') );
-    Editor.registerPackagePath( Path.join(Editor.App.home, 'packages') );
+    Editor.Package.addPath([
+      Editor.url('app://package-examples/'),
+      Editor.url('app://benchmark/'),
+      Path.join(Editor.App.home, 'packages'),
+    ]);
 
     if ( cb ) cb ();
   },
