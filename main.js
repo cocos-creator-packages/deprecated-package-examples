@@ -2,23 +2,22 @@
 
 require('../index');
 
-var Fs = require('fire-fs');
 var Path = require('fire-path');
 
 Editor.App.extend({
-  init ( options, cb ) {
-    // initialize ./.settings
+  init ( opts, cb ) {
     var settingsPath = Path.join(Editor.App.path, '.settings');
-    Fs.ensureDirSync(settingsPath);
-    Editor.registerProfilePath( 'local', settingsPath );
 
-    // TODO: load your profile, and disable packages here
-
-    Editor.Package.addPath([
-      Editor.url('app://package-examples/'),
-      Editor.url('app://benchmark/'),
-      Path.join(Editor.App.home, 'packages'),
-    ]);
+    Editor.init({
+      'profile': {
+        local: settingsPath,
+      },
+      'package-search-path': [
+        Editor.url('app://package-examples/'),
+        Editor.url('app://benchmark/'),
+        Path.join(Editor.App.home, 'packages'),
+      ]
+    });
 
     if ( cb ) cb ();
   },
