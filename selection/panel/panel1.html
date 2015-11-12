@@ -1,377 +1,372 @@
-<script type="text/javascript" src="app://bower_components/svg.js/dist/svg.min.js"></script>
-
 <!-- In general, don't put your style tag out of dom-module tag! -->
 <!-- the style below will take effect in any panel that imports this html file -->
 <!-- the reason we have to do this is a workaround for styling svg rect, otherwise it will not work inside dom-module -->
 <style>
-    demo-selection-panel1 svg rect.node {
-        fill: #09f;
-        stroke-width: 2;
-        stroke: #fff;
-        cursor: pointer;
-    }
+  demo-selection-panel1 svg rect.node {
+    fill: #09f;
+    stroke-width: 2;
+    stroke: #fff;
+    cursor: pointer;
+  }
 
-    demo-selection-panel1 svg rect.node.selected {
-        fill: black;
-        stroke: #0f0;
-    }
+  demo-selection-panel1 svg rect.node.selected {
+    fill: black;
+    stroke: #0f0;
+  }
 
-    demo-selection-panel1 svg .rect-select {
-        fill: rgba( 0, 128, 255, 0.4);
-        stroke-width: 1;
-        stroke: #09f;
-    }
+  demo-selection-panel1 svg .rect-select {
+    fill: rgba( 0, 128, 255, 0.4);
+    stroke-width: 1;
+    stroke: #09f;
+  }
 </style>
 
 <dom-module id="demo-selection-panel1">
-    <style>
-        :host {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: stretch;
-            flex-direction: column;
-        }
+  <style>
+    :host {
+    }
 
-        ul {
-            margin: 0px;
-            padding: 15px;
-            overflow-y: scroll;
-            height: 400px;
-        }
+    ul {
+      margin: 0px;
+      padding: 15px;
+      overflow-y: scroll;
+    }
 
-        ul li {
-            cursor: pointer;
-            padding: 5px;
-            margin: 1px;
-            list-style-type: none;
-        }
+    ul li {
+      cursor: pointer;
+      padding: 5px;
+      margin: 1px;
+      list-style-type: none;
+    }
 
-        ul li:hover {
-            background: #555;
-        }
+    ul li:hover {
+      background: #555;
+    }
 
-        ul li[selected] {
-            background: #09f;
-        }
+    ul li[selected] {
+      background: #09f;
+    }
 
-        ul li[hover] {
-            background: #f90;
-        }
+    ul li[hover] {
+      background: #f90;
+    }
 
-        svg {
-            border: 1px solid black;
-            background: #333;
-            shape-rendering: crispEdges;
-        }
+    svg {
+      border: 1px solid black;
+      background: #333;
+      shape-rendering: crispEdges;
+      width: auto;
+      height: auto;
+    }
 
-        p#instruction {
-            display: block;
-            padding: 15px;
-        }
-    </style>
+    p#instruction {
+      display: block;
+      padding: 15px;
+    }
+  </style>
 
-    <template>
-        <div class="layout vertical fit">
-            <div class="flex-1">
-                <p id='instruction'>This package opens two panels, you can multi-select items in list, or drag a rect to select dots inside. Your selection will be reflected in the other panel.</p>
-            </div>
+  <template>
+    <div class="layout vertical fit">
+      <p id='instruction'>This package opens two panels, you can multi-select items in list, or drag a rect to select dots inside. Your selection will be reflected in the other panel.</p>
 
-            <ul class="flex-1">
-                <template is="dom-repeat" items="{{list}}" id="list">
-                    <li on-click="_onSelect" hover$="{{item.hover}}" selected$="{{item.selected}}">
-                        <span>{{item.name}}</span>
-                    </li>
-                </template>
-            </ul>
-            <svg id="svg" class="flex-1" on-mousedown="_onMouseDown" on-mousemove="_onMouseMove"></svg>
-        </div>
-    </template>
+      <ul>
+        <template is="dom-repeat" items="{{list}}" id="list">
+          <li on-click="_onSelect" hover$="{{item.hover}}" selected$="{{item.selected}}">
+            <span>{{item.name}}</span>
+          </li>
+        </template>
+      </ul>
 
-    <script>
-        Editor.registerPanel('demo-selection.panel1', {
-            ready: function() {
-                this.list = [
-                    'extrajudicially',
-                    'duse',
-                    'appleton',
-                    'aborning',
-                    'evacuee',
-                    'impecunious',
-                    'overrude',
-                    'subrange',
-                    'hamlet',
-                    'subtranslucency',
-                ].map(function(item) {
-                    return {
-                        name: item,
-                        hover: false,
-                        selected: false
-                    };
-                });
-            },
+      <svg id="svg" class="flex-1" on-mousedown="_onMouseDown" on-mousemove="_onMouseMove"></svg>
+    </div>
+  </template>
 
-            attached: function() {
-                this.async(function() {
-                    this.lightDomReady();
-                });
-            },
-
-            lightDomReady: function() {
-                if (this.svg)
-                    return;
-
-                this.svg = SVG(this.$.svg);
-                this.scene = this.svg.group();
-                this.foreground = this.svg.group();
-                this.rectNodes = [];
-
-                var rect = this.$.svg.getBoundingClientRect();
-                this.list.forEach(function(item) {
-                    var name = item.name;
-
-                    var x = Math.randomRange(20, rect.width - 20);
-                    var y = Math.randomRange(20, rect.height - 20);
-                    var node = this.scene.group();
-                    var rectNode = node.rect(10, 10)
-                        .move(-5, 0)
-                        // .stroke({ width: 2, color: '#fff' } )
-                        // .fill({ color: '#09f' } )
-                        .translate(x, y)
-                        .addClass('node');
-                    rectNode.selectable = true;
-                    rectNode.name = name;
-                    this.rectNodes.push(rectNode);
-
-                    // rectNode.on('mouseenter', function () {
-                    //     Editor.Selection.hover( 'normal', rectNode.name );
-                    // });
-
-                    // rectNode.on('mouseleave', function () {
-                    //     Editor.Selection.hover( 'normal', null);
-                    // });
-
-                    node.plain(name)
-                        .font({
-                            size: 15,
-                            anchor: 'middle',
-                        })
-                        .fill({
-                            color: '#999'
-                        })
-                        .translate(x, y - 5);
-                }.bind(this));
-
-                this.syncSelection('normal');
-            },
-
-            _onSelect: function(event) {
-                var model = event.model;
-                // model.set( 'item.selected', !model.item.selected );
-                Editor.Selection.select('normal', model.item.name, true, true);
-            },
-
-            _onMouseMove: function(event) {
-                event.stopPropagation();
-
-                var results = this.rectHitTest(event.offsetX, event.offsetY, 1, 1);
-                if (results.length > 0) {
-                    Editor.Selection.hover('normal', results[0].name);
-                } else {
-                    Editor.Selection.hover('normal', null);
-                }
-            },
-
-            _onMouseDown: function(event) {
-                if (event.which === 1) {
-                    event.stopPropagation();
-
-                    var toggleMode = false;
-                    if (event.metaKey || event.ctrlKey) {
-                        toggleMode = true;
-                    }
-                    var lastSelection = Editor.Selection.curSelection('normal');
-
-                    var rect = this.$.svg.getBoundingClientRect();
-                    var pressx = event.clientX;
-                    var pressy = event.clientY;
-
-                    var mousemoveHandle = function(event) {
-                        event.stopPropagation();
-
-                        // process selection
-                        var startx = pressx - rect.left;
-                        var starty = pressy - rect.top;
-                        var offsetx = event.clientX - pressx;
-                        var offsety = event.clientY - pressy;
-
-                        var magSqr = offsetx * offsetx + offsety * offsety;
-                        if (magSqr < 2.0 * 2.0) {
-                            return;
-                        }
-
-                        if (offsetx < 0.0) {
-                            startx += offsetx;
-                            offsetx = -offsetx;
-                        }
-                        if (offsety < 0.0) {
-                            starty += offsety;
-                            offsety = -offsety;
-                        }
-
-                        this.updateSelectRect(startx, starty, offsetx, offsety);
-                        var results = this.rectHitTest(startx, starty, offsetx, offsety);
-                        var names = results.map(function(node) {
-                            return node.name;
-                        });
-                        if (toggleMode) {
-                            for (i = 0; i < lastSelection.length; ++i) {
-                                if (names.indexOf(lastSelection[i]) === -1)
-                                    names.push(lastSelection[i]);
-                            }
-                        }
-                        Editor.Selection.select('normal', names, true, false);
-                    }.bind(this);
-
-                    var mouseupHandle = function(event) {
-                        event.stopPropagation();
-
-                        document.removeEventListener('mousemove', mousemoveHandle);
-                        document.removeEventListener('mouseup', mouseupHandle);
-
-                        EditorUI.removeDragGhost();
-                        this.style.cursor = '';
-                        this.fadeoutSelectRect();
-
-                        // process selection
-                        var startx = pressx - rect.left;
-                        var starty = pressy - rect.top;
-                        var offsetx = event.clientX - pressx;
-                        var offsety = event.clientY - pressy;
-
-                        var magSqr = offsetx * offsetx + offsety * offsety;
-                        if (magSqr >= 2.0 * 2.0) {
-                            Editor.Selection.confirm();
-                        } else {
-                            var results = this.rectHitTest(startx, starty, 1, 1);
-                            if (toggleMode) {
-                                if (results.length > 0) {
-                                    if (lastSelection.indexOf(results[0].name) === -1) {
-                                        Editor.Selection.select('normal', results[0].name, false, true);
-                                    } else {
-                                        Editor.Selection.unselect('normal', results[0].name, true);
-                                    }
-                                }
-                            } else {
-                                if (results.length > 0) {
-                                    Editor.Selection.select('normal', results[0].name, true, true);
-                                } else {
-                                    Editor.Selection.clear('normal');
-                                }
-                            }
-                        }
-                    }.bind(this);
-
-                    //
-                    EditorUI.addDragGhost();
-                    document.addEventListener('mousemove', mousemoveHandle);
-                    document.addEventListener('mouseup', mouseupHandle);
-
-                    return;
-                }
-            },
-
-            'selection:changed': function(type) {
-                this.syncSelection(type);
-            },
-
-            'selection:hoverin': function(type, name) {
-                var idx = -1;
-                for (var i = 0; i < this.list.length; ++i) {
-                    if (this.list[i].name === name) {
-                        idx = i;
-                        break;
-                    }
-                }
-                if (idx !== -1) {
-                    var item = this.$.list.indexForElement(idx);
-                    this.set('list.' + i + '.hover', true);
-                }
-            },
-
-            'selection:hoverout': function(type, name) {
-                var idx = -1;
-                for (var i = 0; i < this.list.length; ++i) {
-                    if (this.list[i].name === name) {
-                        idx = i;
-                        break;
-                    }
-                }
-                if (idx !== -1) {
-                    var item = this.$.list.indexForElement(idx);
-                    this.set('list.' + i + '.hover', false);
-                }
-            },
-
-            syncSelection: function(type) {
-                var selection = Editor.Selection.curSelection(type);
-                var i, item;
-                for (i = 0; i < this.list.length; ++i) {
-                    item = this.list[i];
-                    this.set('list.' + i + '.selected', selection.indexOf(item.name) !== -1);
-                }
-                for (i = 0; i < this.rectNodes.length; ++i) {
-                    item = this.rectNodes[i];
-                    if (selection.indexOf(item.name) !== -1)
-                        item.addClass('selected');
-                    else
-                        item.removeClass('selected');
-                }
-            },
-
-            updateSelectRect: function(x, y, w, h) {
-                if (!this.selectRect) {
-                    this.selectRect = this.foreground.rect();
-                }
-
-                this.selectRect
-                    .addClass('rect-select')
-                    .move(x, y)
-                    .size(w, h);
-            },
-
-            fadeoutSelectRect: function() {
-                if (!this.selectRect) {
-                    return;
-                }
-
-                var selectRect = this.selectRect;
-                this.selectRect = null;
-
-                selectRect.animate(100, '-').opacity(0.0).after(function() {
-                    selectRect.remove();
-                });
-            },
-
-            rectHitTest: function(x, y, w, h) {
-                var rect = this.svg.node.createSVGRect();
-                rect.x = x;
-                rect.y = y;
-                rect.width = w;
-                rect.height = h;
-
-                var els = this.svg.node.getIntersectionList(rect, null);
-                var results = [];
-
-                for (var i = 0; i < els.length; ++i) {
-                    var el = els[i];
-                    var node = el.instance;
-                    if (node && node.selectable) {
-                        results.push(node);
-                    }
-                }
-
-                return results;
-            },
+  <script>
+    const SVG = require('svg.js');
+    Editor.registerPanel('demo-selection.panel1', {
+      ready: function() {
+        this.list = [
+          'extrajudicially',
+          'duse',
+          'appleton',
+          'aborning',
+          'evacuee',
+          'impecunious',
+          'overrude',
+          'subrange',
+          'hamlet',
+          'subtranslucency',
+        ].map(function(item) {
+          return {
+            name: item,
+            hover: false,
+            selected: false
+          };
         });
-    </script>
+      },
+
+      attached: function() {
+        this.async(function() {
+          this.lightDomReady();
+        });
+      },
+
+      lightDomReady: function() {
+        if (this.svg)
+          return;
+
+        this.svg = SVG(this.$.svg);
+        this.scene = this.svg.group();
+        this.foreground = this.svg.group();
+        this.rectNodes = [];
+
+        var rect = this.$.svg.getBoundingClientRect();
+        this.list.forEach(function(item) {
+          var name = item.name;
+
+          var x = Math.randomRange(20, rect.width - 20);
+          var y = Math.randomRange(20, rect.height - 20);
+          var node = this.scene.group();
+          var rectNode = node.rect(10, 10)
+            .move(-5, 0)
+            // .stroke({ width: 2, color: '#fff' } )
+            // .fill({ color: '#09f' } )
+            .translate(x, y)
+            .addClass('node');
+          rectNode.selectable = true;
+          rectNode.name = name;
+          this.rectNodes.push(rectNode);
+
+          // rectNode.on('mouseenter', function () {
+          //   Editor.Selection.hover( 'normal', rectNode.name );
+          // });
+
+          // rectNode.on('mouseleave', function () {
+          //   Editor.Selection.hover( 'normal', null);
+          // });
+
+          node.plain(name)
+            .font({
+              size: 15,
+              anchor: 'middle',
+            })
+            .fill({
+              color: '#999'
+            })
+            .translate(x, y - 5);
+        }.bind(this));
+
+        this.syncSelection('normal');
+      },
+
+      _onSelect: function(event) {
+        var model = event.model;
+        // model.set( 'item.selected', !model.item.selected );
+        Editor.Selection.select('normal', model.item.name, true, true);
+      },
+
+      _onMouseMove: function(event) {
+        event.stopPropagation();
+
+        var results = this.rectHitTest(event.offsetX, event.offsetY, 1, 1);
+        if (results.length > 0) {
+          Editor.Selection.hover('normal', results[0].name);
+        } else {
+          Editor.Selection.hover('normal', null);
+        }
+      },
+
+      _onMouseDown: function(event) {
+        if (event.which === 1) {
+          event.stopPropagation();
+
+          var toggleMode = false;
+          if (event.metaKey || event.ctrlKey) {
+            toggleMode = true;
+          }
+          var lastSelection = Editor.Selection.curSelection('normal');
+
+          var rect = this.$.svg.getBoundingClientRect();
+          var pressx = event.clientX;
+          var pressy = event.clientY;
+
+          var mousemoveHandle = function(event) {
+            event.stopPropagation();
+
+            // process selection
+            var startx = pressx - rect.left;
+            var starty = pressy - rect.top;
+            var offsetx = event.clientX - pressx;
+            var offsety = event.clientY - pressy;
+
+            var magSqr = offsetx * offsetx + offsety * offsety;
+            if (magSqr < 2.0 * 2.0) {
+              return;
+            }
+
+            if (offsetx < 0.0) {
+              startx += offsetx;
+              offsetx = -offsetx;
+            }
+            if (offsety < 0.0) {
+              starty += offsety;
+              offsety = -offsety;
+            }
+
+            this.updateSelectRect(startx, starty, offsetx, offsety);
+            var results = this.rectHitTest(startx, starty, offsetx, offsety);
+            var names = results.map(function(node) {
+              return node.name;
+            });
+            if (toggleMode) {
+              for (i = 0; i < lastSelection.length; ++i) {
+                if (names.indexOf(lastSelection[i]) === -1)
+                  names.push(lastSelection[i]);
+              }
+            }
+            Editor.Selection.select('normal', names, true, false);
+          }.bind(this);
+
+          var mouseupHandle = function(event) {
+            event.stopPropagation();
+
+            document.removeEventListener('mousemove', mousemoveHandle);
+            document.removeEventListener('mouseup', mouseupHandle);
+
+            EditorUI.removeDragGhost();
+            this.style.cursor = '';
+            this.fadeoutSelectRect();
+
+            // process selection
+            var startx = pressx - rect.left;
+            var starty = pressy - rect.top;
+            var offsetx = event.clientX - pressx;
+            var offsety = event.clientY - pressy;
+
+            var magSqr = offsetx * offsetx + offsety * offsety;
+            if (magSqr >= 2.0 * 2.0) {
+              Editor.Selection.confirm();
+            } else {
+              var results = this.rectHitTest(startx, starty, 1, 1);
+              if (toggleMode) {
+                if (results.length > 0) {
+                  if (lastSelection.indexOf(results[0].name) === -1) {
+                    Editor.Selection.select('normal', results[0].name, false, true);
+                  } else {
+                    Editor.Selection.unselect('normal', results[0].name, true);
+                  }
+                }
+              } else {
+                if (results.length > 0) {
+                  Editor.Selection.select('normal', results[0].name, true, true);
+                } else {
+                  Editor.Selection.clear('normal');
+                }
+              }
+            }
+          }.bind(this);
+
+          //
+          EditorUI.addDragGhost();
+          document.addEventListener('mousemove', mousemoveHandle);
+          document.addEventListener('mouseup', mouseupHandle);
+
+          return;
+        }
+      },
+
+      'selection:changed': function(type) {
+        this.syncSelection(type);
+      },
+
+      'selection:hoverin': function(type, name) {
+        var idx = -1;
+        for (var i = 0; i < this.list.length; ++i) {
+          if (this.list[i].name === name) {
+            idx = i;
+            break;
+          }
+        }
+        if (idx !== -1) {
+          var item = this.$.list.indexForElement(idx);
+          this.set('list.' + i + '.hover', true);
+        }
+      },
+
+      'selection:hoverout': function(type, name) {
+        var idx = -1;
+        for (var i = 0; i < this.list.length; ++i) {
+          if (this.list[i].name === name) {
+            idx = i;
+            break;
+          }
+        }
+        if (idx !== -1) {
+          var item = this.$.list.indexForElement(idx);
+          this.set('list.' + i + '.hover', false);
+        }
+      },
+
+      syncSelection: function(type) {
+        var selection = Editor.Selection.curSelection(type);
+        var i, item;
+        for (i = 0; i < this.list.length; ++i) {
+          item = this.list[i];
+          this.set('list.' + i + '.selected', selection.indexOf(item.name) !== -1);
+        }
+        for (i = 0; i < this.rectNodes.length; ++i) {
+          item = this.rectNodes[i];
+          if (selection.indexOf(item.name) !== -1)
+            item.addClass('selected');
+          else
+            item.removeClass('selected');
+        }
+      },
+
+      updateSelectRect: function(x, y, w, h) {
+        if (!this.selectRect) {
+          this.selectRect = this.foreground.rect();
+        }
+
+        this.selectRect
+          .addClass('rect-select')
+          .move(x, y)
+          .size(w, h);
+      },
+
+      fadeoutSelectRect: function() {
+        if (!this.selectRect) {
+          return;
+        }
+
+        var selectRect = this.selectRect;
+        this.selectRect = null;
+
+        selectRect.animate(100, '-').opacity(0.0).after(function() {
+          selectRect.remove();
+        });
+      },
+
+      rectHitTest: function(x, y, w, h) {
+        var rect = this.svg.node.createSVGRect();
+        rect.x = x;
+        rect.y = y;
+        rect.width = w;
+        rect.height = h;
+
+        var els = this.svg.node.getIntersectionList(rect, null);
+        var results = [];
+
+        for (var i = 0; i < els.length; ++i) {
+          var el = els[i];
+          var node = el.instance;
+          if (node && node.selectable) {
+            results.push(node);
+          }
+        }
+
+        return results;
+      },
+    });
+  </script>
 </dom-module>

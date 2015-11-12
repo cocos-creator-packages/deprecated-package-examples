@@ -1,13 +1,15 @@
+'use strict';
+
 module.exports = {
-    load: function () {
-        Editor.Selection.register('normal');
-    },
+  load: function () {
+    Editor.Selection.register('normal');
+  },
 
-    unload: function () {
-    },
+  unload: function () {
+  },
 
-    'demo-selection:open': function () {
-        Editor.Panel.open('demo-selection.panel1');
-        Editor.Panel.open('demo-selection.panel2');
-    },
+  'demo-selection:open': function () {
+    Editor.Panel.open('demo-selection.panel1');
+    Editor.Panel.open('demo-selection.panel2');
+  },
 };
