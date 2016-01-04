@@ -7,6 +7,9 @@
   "menus": {
     "Examples/Confirm Close": {
       "message": "demo-confirm-close:open"
+    },
+    "Examples/Confirm Close (Pure Window)": {
+      "message": "demo-confirm-close:open-pure-window"
     }
   },
   "panels": {
