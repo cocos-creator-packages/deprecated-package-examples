@@ -18,6 +18,10 @@ module.exports = {
     });
     editorWin.load('http://www.baidu.com');
     editorWin.nativeWin.once('close', event => {
+      if ( Editor.isClosing ) {
+        return;
+      }
+
       event.preventDefault();
       Editor.log('prevent close manually');
 
