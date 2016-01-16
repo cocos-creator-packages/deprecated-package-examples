@@ -1,0 +1,23 @@
+{
+  "name": "demo-simple-webview",
+  "version": "0.0.1",
+  "description": "Simple WebView Demo",
+  "author": "Firebox Technology",
+  "main": "main.js",
+  "menus": {
+    "Examples/Simple WebView": {
+      "message": "demo-simple-webview:open"
+    }
+  },
+  "panels": {
+    "panel": {
+      "frame": "panel/panel.html",
+      "type": "dockable",
+      "title": "Simple WebView",
+      "width": 800,
+      "height": 600,
+      "messages": [
+      ]
+    }
+  }
+}
