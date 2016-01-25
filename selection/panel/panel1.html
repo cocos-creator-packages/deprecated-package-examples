@@ -124,8 +124,8 @@
         this.list.forEach(function(item) {
           var name = item.name;
 
-          var x = Math.randomRange(20, rect.width - 20);
-          var y = Math.randomRange(20, rect.height - 20);
+          var x = Editor.Math.randomRange(20, rect.width - 20);
+          var y = Editor.Math.randomRange(20, rect.height - 20);
           var node = this.scene.group();
           var rectNode = node.rect(10, 10)
             .move(-5, 0)

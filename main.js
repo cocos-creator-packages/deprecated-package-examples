@@ -25,13 +25,13 @@ Editor.App.extend({
   run () {
     // create main window
     var mainWin = new Editor.Window('main', {
-      'title': 'Editor Framework',
-      'width': 900,
-      'height': 700,
-      'min-width': 900,
-      'min-height': 700,
-      'show': false,
-      'resizable': true,
+      title: 'Editor Framework',
+      width: 900,
+      height: 700,
+      minWidth: 900,
+      minHeight: 700,
+      show: false,
+      resizable: true,
     });
     Editor.mainWindow = mainWin;
 
