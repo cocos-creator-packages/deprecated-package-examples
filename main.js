@@ -2,7 +2,7 @@
 
 require('../index');
 
-var Path = require('fire-path');
+const Path = require('fire-path');
 
 Editor.App.extend({
   init ( opts, cb ) {
@@ -19,7 +19,9 @@ Editor.App.extend({
       ]
     });
 
-    if ( cb ) cb ();
+    if ( cb ) {
+      cb ();
+    }
   },
 
   run () {
