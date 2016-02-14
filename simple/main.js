@@ -1,11 +1,13 @@
+'use strict';
+
 module.exports = {
-    load: function () {
-    },
+  load () {
+  },
 
-    unload: function () {
-    },
+  unload () {
+  },
 
-    'demo-simple:open': function () {
-        Editor.Panel.open('demo-simple.panel');
-    },
+  'demo-simple:open' () {
+    Editor.Panel.open('demo-simple.panel');
+  },
 };
