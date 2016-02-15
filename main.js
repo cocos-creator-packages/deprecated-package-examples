@@ -6,7 +6,7 @@ const Path = require('fire-path');
 
 Editor.App.extend({
   init ( opts, cb ) {
-    var settingsPath = Path.join(Editor.App.path, '.settings');
+    let settingsPath = Path.join(Editor.App.path, '.settings');
 
     Editor.init({
       'profile': {
@@ -26,7 +26,7 @@ Editor.App.extend({
 
   run () {
     // create main window
-    var mainWin = new Editor.Window('main', {
+    let mainWin = new Editor.Window('main', {
       title: 'Editor Framework',
       width: 900,
       height: 700,
