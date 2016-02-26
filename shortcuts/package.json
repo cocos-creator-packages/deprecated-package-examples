@@ -4,7 +4,7 @@
   "description": "Shortcuts Demo",
   "author": "Firebox Technology",
   "main": "main.js",
-  "menus": {
+  "main-menu": {
     "Examples/Shortcuts": {
       "message": "demo-shortcuts:open"
     }

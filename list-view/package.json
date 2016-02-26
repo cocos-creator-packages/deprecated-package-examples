@@ -5,7 +5,7 @@
   "author": "Firebox Technology",
   "main": "main.js",
   "build": false,
-  "menus": {
+  "main-menu": {
     "Examples/List View": {
       "message": "demo-list-view:open"
     }

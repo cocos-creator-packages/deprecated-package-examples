@@ -5,7 +5,7 @@
   "author": "Firebox Technology",
   "main": "main.js",
   "build": false,
-  "menus": {
+  "main-menu": {
     "Examples/Run Command": {
       "message": "demo-run-command:open"
     }

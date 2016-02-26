@@ -1,11 +1,15 @@
+'use strict';
+
 module.exports = {
-    load: function () {
-    },
+  load () {
+  },
 
-    unload: function () {
-    },
+  unload () {
+  },
 
-    'demo-shortcuts:open': function () {
-        Editor.Panel.open('demo-shortcuts.panel');
+  messages: {
+    'open' () {
+      Editor.Panel.open('demo-shortcuts.panel');
     },
+  },
 };

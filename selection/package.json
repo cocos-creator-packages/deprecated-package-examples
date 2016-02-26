@@ -4,7 +4,7 @@
   "description": "Selection Demo",
   "author": "Firebox Technology",
   "main": "main.js",
-  "menus": {
+  "main-menu": {
     "Examples/Selection": {
       "message": "demo-selection:open"
     }

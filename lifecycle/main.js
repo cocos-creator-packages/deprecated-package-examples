@@ -1,11 +1,15 @@
+'use strict';
+
 module.exports = {
-    load: function () {
-    },
+  load () {
+  },
 
-    unload: function () {
-    },
+  unload () {
+  },
 
-    'demo-lifecycle:open': function () {
-        Editor.Panel.open('demo-lifecycle.panel');
+  messages: {
+    'open' () {
+      Editor.Panel.open('demo-lifecycle.panel');
     },
+  },
 };

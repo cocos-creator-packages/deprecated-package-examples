@@ -7,7 +7,9 @@ module.exports = {
   unload () {
   },
 
-  'demo-simple:open' () {
-    Editor.Panel.open('demo-simple.panel');
+  messages: {
+    'open' () {
+      Editor.Panel.open('demo-simple.panel');
+    },
   },
 };

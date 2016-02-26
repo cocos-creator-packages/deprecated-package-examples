@@ -4,7 +4,7 @@
   "description": "Simple WebView Demo",
   "author": "Firebox Technology",
   "main": "main.js",
-  "menus": {
+  "main-menu": {
     "Examples/Simple WebView": {
       "message": "demo-simple-webview:open"
     }

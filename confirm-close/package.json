@@ -4,7 +4,7 @@
   "description": "Confirm Close Demo",
   "author": "Firebox Technology",
   "main": "main.js",
-  "menus": {
+  "main-menu": {
     "Examples/Confirm Close": {
       "message": "demo-confirm-close:open"
     },
