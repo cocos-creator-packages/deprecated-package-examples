@@ -275,11 +275,11 @@
         }
       },
 
-      'selection:changed': function(type) {
+      'selection:changed': function(event, type) {
         this.syncSelection(type);
       },
 
-      'selection:hoverin': function(type, name) {
+      'selection:hoverin': function(event, type, name) {
         var idx = -1;
         for (var i = 0; i < this.list.length; ++i) {
           if (this.list[i].name === name) {
@@ -293,7 +293,7 @@
         }
       },
 
-      'selection:hoverout': function(type, name) {
+      'selection:hoverout': function(event, type, name) {
         var idx = -1;
         for (var i = 0; i < this.list.length; ++i) {
           if (this.list[i].name === name) {
