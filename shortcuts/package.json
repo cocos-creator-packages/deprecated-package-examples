@@ -9,21 +9,19 @@
       "message": "demo-shortcuts:open"
     }
   },
-  "panels": {
-    "panel": {
-      "frame": "panel/panel.html",
-      "type": "dockable",
-      "title": "Simple",
-      "width": 800,
-      "height": 600,
-      "shortcuts": {
-        "a": "pressA",
-        "#foo": {
-            "a": "fooPressA"
-        },
-        "#bar": {
-            "a": "barPressA"
-        }
+  "panel": {
+    "frame": "panel/panel.html",
+    "type": "dockable",
+    "title": "Simple",
+    "width": 800,
+    "height": 600,
+    "shortcuts": {
+      "a": "pressA",
+      "#foo": {
+        "a": "fooPressA"
+      },
+      "#bar": {
+        "a": "barPressA"
       }
     }
   }

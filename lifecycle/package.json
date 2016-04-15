@@ -9,18 +9,16 @@
       "message": "demo-lifecycle:open"
     }
   },
-  "panels": {
-    "panel": {
-      "frame": "panel/lifecycle.html",
-      "type": "dockable",
-      "title": "Lifecycle",
-      "width": 800,
-      "height": 600,
-      "messages": [
-      ],
-      "profiles": {
-        "local": {
-        }
+  "panel": {
+    "frame": "panel/lifecycle.html",
+    "type": "dockable",
+    "title": "Lifecycle",
+    "width": 800,
+    "height": 600,
+    "messages": [
+    ],
+    "profiles": {
+      "local": {
       }
     }
   }

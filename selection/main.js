@@ -10,8 +10,8 @@ module.exports = {
 
   messages: {
     'open' () {
-      Editor.Panel.open('demo-selection.panel1');
-      Editor.Panel.open('demo-selection.panel2');
+      Editor.Panel.open('demo-selection.1');
+      Editor.Panel.open('demo-selection.2');
     },
   },
 };

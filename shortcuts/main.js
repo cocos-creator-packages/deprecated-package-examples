@@ -9,7 +9,7 @@ module.exports = {
 
   messages: {
     'open' () {
-      Editor.Panel.open('demo-shortcuts.panel');
+      Editor.Panel.open('demo-shortcuts');
     },
   },
 };

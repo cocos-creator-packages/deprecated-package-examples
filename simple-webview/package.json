@@ -9,15 +9,13 @@
       "message": "demo-simple-webview:open"
     }
   },
-  "panels": {
-    "panel": {
-      "frame": "panel/panel.html",
-      "type": "dockable",
-      "title": "Simple WebView",
-      "width": 800,
-      "height": 600,
-      "messages": [
-      ]
-    }
+  "panel": {
+    "frame": "panel/panel.html",
+    "type": "dockable",
+    "title": "Simple WebView",
+    "width": 800,
+    "height": 600,
+    "messages": [
+    ]
   }
 }

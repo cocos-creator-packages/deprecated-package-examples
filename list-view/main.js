@@ -9,7 +9,7 @@ module.exports = {
 
   messages: {
     'open' () {
-      Editor.Panel.open('demo-list-view.panel');
+      Editor.Panel.open('demo-list-view');
     },
 
     // load list content from a local json file

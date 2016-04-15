@@ -9,7 +9,7 @@ module.exports = {
 
   messages: {
     'open' () {
-      Editor.Panel.open('demo-confirm-close.panel');
+      Editor.Panel.open('demo-confirm-close');
     },
 
     'open-pure-window' () {

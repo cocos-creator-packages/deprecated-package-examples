@@ -9,7 +9,7 @@ module.exports = {
 
   messages: {
     'open' () {
-      Editor.Panel.open('demo-run-command.panel');
+      Editor.Panel.open('demo-run-command');
     },
 
     'run' (opts) {
@@ -22,7 +22,7 @@ module.exports = {
       // whenever child process' stdout receive data, use IPC message to
       // send the message to panel
       child.stdout.on('data', (data) => {
-        Editor.sendToPanel('demo-run-command.panel', 'demo-run-command:log', data.toString());
+        Editor.sendToPanel('demo-run-command', 'demo-run-command:log', data.toString());
       });
     }
   },

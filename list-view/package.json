@@ -10,15 +10,13 @@
       "message": "demo-list-view:open"
     }
   },
-  "panels": {
-    "panel": {
-      "frame": "panel/panel.html",
-      "type": "dockable",
-      "title": "Demo: List View",
-      "width": 800,
-      "height": 600,
-      "messages": [
-      ]
-    }
+  "panel": {
+    "frame": "panel/panel.html",
+    "type": "dockable",
+    "title": "Demo: List View",
+    "width": 800,
+    "height": 600,
+    "messages": [
+    ]
   }
 }

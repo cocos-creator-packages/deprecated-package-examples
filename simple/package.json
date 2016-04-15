@@ -9,15 +9,13 @@
       "message": "demo-simple:open"
     }
   },
-  "panels": {
-    "panel": {
-      "frame": "panel/panel.html",
-      "type": "dockable",
-      "title": "Simple",
-      "width": 800,
-      "height": 600,
-      "messages": [
-      ]
-    }
+  "panel": {
+    "frame": "panel/panel.html",
+    "type": "dockable",
+    "title": "Simple",
+    "width": 800,
+    "height": 600,
+    "messages": [
+    ]
   }
 }

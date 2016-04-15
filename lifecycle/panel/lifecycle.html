@@ -1,37 +1,37 @@
 <link rel="import" href="simple-life.html">
 
 <dom-module id="demo-lifecycle">
-    <style>
-        :host {
-            padding: 10px;
-        }
-    </style>
+  <style>
+    :host {
+        padding: 10px;
+    }
+  </style>
 
-    <template>
-        <div>
-            <p id='instruction'>This panel demonstrate custom element life cycle by log event at key life cycle callback function.</p>
-            <p>Open 'simple-life.html' to see those events, and open console panel to see event fire order.</p>
-        </div>
+  <template>
+    <div>
+      <p id='instruction'>This panel demonstrate custom element life cycle by log event at key life cycle callback function.</p>
+      <p>Open 'simple-life.html' to see those events, and open console panel to see event fire order.</p>
+    </div>
 
-        <simple-life name="a" class="flex-1">
-            <simple-life name="a.b" class="fit">
-                <simple-life name="a.b.c-01" class="flex-1">
-                    <simple-life name="a.b.c-01.d" class="fit">
-                        Hello World 001!
-                    </simple-life>
-                </simple-life>
-
-                <simple-life name="a.b.c-02" class="flex-1">
-                    <simple-life name="a.b.c-02.d" class="fit">
-                        Hello World 002!
-                    </simple-life>
-                </simple-life>
-            </simple-life>
+    <simple-life name="a" class="flex-1">
+      <simple-life name="a.b" class="fit">
+        <simple-life name="a.b.c-01" class="flex-1">
+          <simple-life name="a.b.c-01.d" class="fit">
+            Hello World 001!
+          </simple-life>
         </simple-life>
-    </template>
 
-    <script>
-        Editor.registerPanel( 'demo-lifecycle.panel', {
-        });
-    </script>
+        <simple-life name="a.b.c-02" class="flex-1">
+          <simple-life name="a.b.c-02.d" class="fit">
+            Hello World 002!
+          </simple-life>
+        </simple-life>
+      </simple-life>
+    </simple-life>
+  </template>
+
+  <script>
+    Editor.polymerElement( 'demo-lifecycle', {
+    });
+  </script>
 </dom-module>
