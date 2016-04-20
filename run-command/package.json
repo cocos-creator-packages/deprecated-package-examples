@@ -11,13 +11,11 @@
     }
   },
   "panel": {
-    "frame": "panel/panel.html",
+    "main": "panel/panel.html",
+    "ui": "polymer",
     "type": "dockable",
     "title": "Demo: Run Command",
     "width": 800,
-    "height": 600,
-    "messages": [
-      "demo-run-command:log"
-      ]
+    "height": 600
   }
 }

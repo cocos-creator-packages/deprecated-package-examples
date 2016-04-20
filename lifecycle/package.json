@@ -10,13 +10,12 @@
     }
   },
   "panel": {
-    "frame": "panel/lifecycle.html",
+    "main": "panel/lifecycle.html",
+    "ui": "polymer",
     "type": "dockable",
     "title": "Lifecycle",
     "width": 800,
     "height": 600,
-    "messages": [
-    ],
     "profiles": {
       "local": {
       }

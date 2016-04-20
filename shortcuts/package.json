@@ -10,7 +10,8 @@
     }
   },
   "panel": {
-    "frame": "panel/panel.html",
+    "main": "panel/panel.html",
+    "ui": "polymer",
     "type": "dockable",
     "title": "Simple",
     "width": 800,

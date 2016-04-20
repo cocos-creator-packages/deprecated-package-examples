@@ -42,6 +42,40 @@
 
   <script>
     Editor.polymerPanel( 'demo-selection.2', {
+      messages: {
+        'selection:changed': function ( event, type ) {
+          this.syncSelection(type);
+        },
+
+        'selection:hoverin': function ( event, type, name ) {
+          var idx = -1;
+          for ( var i = 0; i < this.list.length; ++i ) {
+            if ( this.list[i].name === name ) {
+              idx = i;
+              break;
+            }
+          }
+          if ( idx !== -1 ) {
+            var item = this.$.list.indexForElement(idx);
+            this.set('list.' + i + '.hover', true );
+          }
+        },
+
+        'selection:hoverout': function ( event, type, name ) {
+          var idx = -1;
+          for ( var i = 0; i < this.list.length; ++i ) {
+            if ( this.list[i].name === name ) {
+              idx = i;
+              break;
+            }
+          }
+          if ( idx !== -1 ) {
+            var item = this.$.list.indexForElement(idx);
+            this.set('list.' + i + '.hover', false );
+          }
+        },
+      },
+
       ready: function () {
         this.list = [
           'extrajudicially',
@@ -67,38 +101,6 @@
         var model = event.model;
         // model.set( 'item.selected', !model.item.selected );
         Editor.Selection.select( 'normal', model.item.name, true, true );
-      },
-
-      'selection:changed': function ( event, type ) {
-        this.syncSelection(type);
-      },
-
-      'selection:hoverin': function ( event, type, name ) {
-        var idx = -1;
-        for ( var i = 0; i < this.list.length; ++i ) {
-          if ( this.list[i].name === name ) {
-            idx = i;
-            break;
-          }
-        }
-        if ( idx !== -1 ) {
-          var item = this.$.list.indexForElement(idx);
-          this.set('list.' + i + '.hover', true );
-        }
-      },
-
-      'selection:hoverout': function ( event, type, name ) {
-        var idx = -1;
-        for ( var i = 0; i < this.list.length; ++i ) {
-          if ( this.list[i].name === name ) {
-            idx = i;
-            break;
-          }
-        }
-        if ( idx !== -1 ) {
-          var item = this.$.list.indexForElement(idx);
-          this.set('list.' + i + '.hover', false );
-        }
       },
 
       syncSelection: function ( type ) {

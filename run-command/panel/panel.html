@@ -24,6 +24,13 @@
 
   <script>
     Editor.polymerPanel( 'demo-run-command', {
+      messages: {
+        // to receive IPC message on page-level, you need to register message in package.json
+        'demo-run-command:log' (message) {
+          // log command process stdout from core-level
+          Editor.log(message);
+        }
+      },
 
       ready: function () {
         // placeholder command line and current working directory
@@ -40,12 +47,6 @@
           cwd: this.cwdStr
         });
       },
-
-      // to receive IPC message on page-level, you need to register message in package.json
-      'demo-run-command:log' (message) {
-        // log command process stdout from core-level
-        Editor.log(message);
-      }
     });
   </script>
 </dom-module>

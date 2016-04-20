@@ -10,27 +10,19 @@
     }
   },
   "panel.1": {
-    "frame": "panel/panel1.html",
+    "main": "panel/panel1.html",
+    "ui": "polymer",
     "type": "dockable",
     "title": "Selection 1",
     "width": 800,
-    "height": 800,
-    "messages": [
-      "selection:changed",
-      "selection:hoverin",
-      "selection:hoverout"
-      ]
+    "height": 800
   },
   "panel.2": {
-    "frame": "panel/panel2.html",
+    "main": "panel/panel2.html",
+    "ui": "polymer",
     "type": "dockable",
     "title": "Selection 2",
     "width": 800,
-    "height": 600,
-    "messages": [
-      "selection:changed",
-      "selection:hoverin",
-      "selection:hoverout"
-      ]
+    "height": 600
   }
 }

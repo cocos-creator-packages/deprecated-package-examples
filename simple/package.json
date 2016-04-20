@@ -10,12 +10,10 @@
     }
   },
   "panel": {
-    "frame": "panel/panel.html",
+    "main": "panel/panel.js",
     "type": "dockable",
     "title": "Simple",
-    "width": 800,
-    "height": 600,
-    "messages": [
-    ]
+    "width": 400,
+    "height": 300
   }
 }
