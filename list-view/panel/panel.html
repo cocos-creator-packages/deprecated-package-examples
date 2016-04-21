@@ -16,7 +16,7 @@
   <script>
     Editor.polymerPanel('demo-list-view', {
       ready: function () {
-        Editor.sendRequestToCore('demo-list-view:query-list', function ( results ) {
+        Editor.Ipc.sendToMain('demo-list-view:query-list', function ( err, results ) {
           this.list = results;
         }.bind(this));
       }

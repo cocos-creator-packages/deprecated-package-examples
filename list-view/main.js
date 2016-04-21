@@ -13,10 +13,10 @@ module.exports = {
     },
 
     // load list content from a local json file
-    'query-list' (event, reply) {
+    'query-list' (event) {
       delete require.cache[require.resolve('./list-infos.json')];
       // use reply to send back request results
-      reply(require('./list-infos.json').list);
+      event.reply(null, require('./list-infos.json').list);
     }
   },
 };
