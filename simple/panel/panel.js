@@ -11,12 +11,17 @@ Editor.Panel.extend({
     <h1>This is a simple panel</h1>
   `,
 
-  messages: {
-    'editor:panel-run' () {
-      console.log('cool!');
+  listeners: {
+    click ( event ) {
+      event.stopPropagation();
+      console.log('click!');
     }
   },
 
   ready () {
+  },
+
+  run (argv) {
+    Editor.log(`Panel run: ${argv}`);
   },
 });
