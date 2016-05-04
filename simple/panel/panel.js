@@ -15,13 +15,17 @@ Editor.Panel.extend({
     click ( event ) {
       event.stopPropagation();
       console.log('click!');
-    }
+    },
+
+    'panel-resize' ( event ) {
+      console.log(event.target);
+    },
   },
 
   ready () {
   },
 
   run (argv) {
-    Editor.log(`Panel run: ${argv}`);
+    console.log(`panel run: ${argv}`);
   },
 });
