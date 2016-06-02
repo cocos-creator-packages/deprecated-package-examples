@@ -30,25 +30,31 @@
         ready () {
 
           window.addEventListener('beforeunload', event => {
+            let stopUnload = false;
+
             let res = this._confirmClose();
             switch ( res ) {
             // save
             case 0:
               Editor.log('Save');
-              event.returnValue = true;
-              return;
+              stopUnload = false;
+              break;
 
             // cancel
             case 1:
               Editor.log('Cancel');
-              event.returnValue = false;
-              return;
+              stopUnload = true;
+              break;
 
             // don't save
             case 2:
               Editor.log('Don\'t Save');
+              stopUnload = false;
+              break;
+            }
+
+            if ( stopUnload ) {
               event.returnValue = true;
-              return;
             }
           });
 
